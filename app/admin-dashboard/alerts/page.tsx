@@ -14,6 +14,7 @@ import {
   Camera,
   Mic,
   User,
+  Users,
   RotateCcw,
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -30,13 +31,13 @@ import { Sidebar } from '@/components/layout/Sidebar';
 import { integrityAlerts, type IntegrityAlert } from '@/lib/mock-data';
 import { cn } from '@/lib/utils';
 
-const alertTypeIcons: Record<string, typeof AlertTriangle> = {
+const alertTypeIcons: Record<IntegrityAlert['alertType'], typeof AlertTriangle> = {
   'replay-attack': RotateCcw,
+  'duplicate-face': Users,
+  'audio-anomaly': Mic,
   'face-occlusion': User,
+  'blink-anomaly': Eye,
   'lip-sync-mismatch': Mic,
-  'multi-face': User,
-  'audio-injection': Mic,
-  'deepfake-detected': Camera,
 };
 
 const severityColors = {
@@ -101,7 +102,7 @@ export default function IntegrityAlertsPage() {
     },
   ];
 
-  const formatAlertType = (type: string) => {
+  const formatAlertType = (type: IntegrityAlert['alertType']) => {
     return type.split('-').map((w) => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
   };
 
@@ -192,7 +193,7 @@ export default function IntegrityAlertsPage() {
                 </CardHeader>
                 <CardContent className="max-h-[600px] space-y-3 overflow-y-auto p-4">
                   {filteredAlerts.map((alert, index) => {
-                    const Icon = alertTypeIcons[alert.type] || AlertTriangle;
+                    const Icon = alertTypeIcons[alert.alertType] || AlertTriangle;
                     return (
                       <motion.div
                         key={alert.id}
@@ -230,7 +231,7 @@ export default function IntegrityAlertsPage() {
                             </div>
                             <div>
                               <p className="font-medium text-foreground">
-                                {formatAlertType(alert.type)}
+                                {formatAlertType(alert.alertType)}
                               </p>
                               <p className="mt-1 text-sm text-muted-foreground">
                                 {alert.description}
@@ -291,7 +292,7 @@ export default function IntegrityAlertsPage() {
 
                       <div>
                         <h3 className="text-lg font-semibold text-foreground">
-                          {formatAlertType(selectedAlert.type)}
+                          {formatAlertType(selectedAlert.alertType)}
                         </h3>
                         <p className="mt-2 text-muted-foreground">{selectedAlert.description}</p>
                       </div>

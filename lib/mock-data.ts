@@ -38,6 +38,8 @@ export interface IntegrityAlert {
   description: string;
   technicalDetails: string;
   timestamp: string;
+  confidence: number;
+  frameIndex: number;
 }
 
 export interface DashboardStats {
@@ -309,7 +311,9 @@ export const integrityAlerts: IntegrityAlert[] = [
     severity: 'critical',
     description: 'Suspected replay attack detected during video assessment',
     technicalDetails: 'Audio phase drift detected at 18.2ms, exceeding 15ms threshold. Frame-to-audio synchronization anomaly confirmed.',
-    timestamp: '2024-01-15T12:24:15Z'
+    timestamp: '2024-01-15T12:24:15Z',
+    confidence: 0.92,
+    frameIndex: 182
   },
   {
     id: 'ALERT-002',
@@ -319,7 +323,9 @@ export const integrityAlerts: IntegrityAlert[] = [
     severity: 'high',
     description: 'Face occlusion exceeds acceptable threshold',
     technicalDetails: 'Face visibility dropped to 53% across 47% of assessment frames. Minimum required visibility: 85%.',
-    timestamp: '2024-01-15T12:25:02Z'
+    timestamp: '2024-01-15T12:25:02Z',
+    confidence: 0.88,
+    frameIndex: 240
   },
   {
     id: 'ALERT-003',
@@ -329,7 +335,9 @@ export const integrityAlerts: IntegrityAlert[] = [
     severity: 'medium',
     description: 'Abnormal eye blink pattern detected',
     technicalDetails: 'Eye blink frequency: 4.2 blinks/min. Expected baseline: 6.5-8.0 blinks/min. Deviation: -2.3 blinks/min.',
-    timestamp: '2024-01-15T11:12:48Z'
+    timestamp: '2024-01-15T11:12:48Z',
+    confidence: 0.67,
+    frameIndex: 96
   },
   {
     id: 'ALERT-004',
@@ -339,7 +347,9 @@ export const integrityAlerts: IntegrityAlert[] = [
     severity: 'medium',
     description: 'Audio-visual synchronization anomaly detected',
     technicalDetails: 'Lip movement to audio offset: 23ms. Acceptable threshold: 15ms. Possible pre-recorded audio injection.',
-    timestamp: '2024-01-15T15:52:21Z'
+    timestamp: '2024-01-15T15:52:21Z',
+    confidence: 0.71,
+    frameIndex: 214
   },
   {
     id: 'ALERT-005',
@@ -349,7 +359,9 @@ export const integrityAlerts: IntegrityAlert[] = [
     severity: 'critical',
     description: 'Potential duplicate identity detected',
     technicalDetails: 'Facial embedding cosine similarity: 0.94 with candidate KA-MYS-2024-0892. Threshold for duplicate flag: 0.85.',
-    timestamp: '2024-01-15T17:08:33Z'
+    timestamp: '2024-01-15T17:08:33Z',
+    confidence: 0.95,
+    frameIndex: 332
   },
   {
     id: 'ALERT-006',
@@ -359,7 +371,9 @@ export const integrityAlerts: IntegrityAlert[] = [
     severity: 'high',
     description: 'Audio quality degradation pattern detected',
     technicalDetails: 'SNR dropped from 28dB to 12dB during technical questions. Spectral analysis indicates possible audio switching.',
-    timestamp: '2024-01-15T18:15:47Z'
+    timestamp: '2024-01-15T18:15:47Z',
+    confidence: 0.83,
+    frameIndex: 156
   }
 ];
 
